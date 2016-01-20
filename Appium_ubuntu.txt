@@ -1,0 +1,49 @@
+
+Appium - Ubuntu: Invoking a Andoird Application installed in the devices 
+
+Pre-requesties: 
+1.) There shuld be a Appium installed in your Ubuntu Machine, if not follow this link for the same
+http://ubuntubegin.blogspot.in/2015/07/how-to-setup-appium-in-ubuntu.html
+
+2) Need to have - Java - openjdk . Check if its instlled in your device - "java -version"
+
+3.) Android Sdk - If not installed follow this link : http://developer.android.com/sdk/index.html#Other 
+
+4) Need to have Eclipse- Recomended MARS1 - Eclipse Java EE IDE for Web Developers.
+
+Note #1: The App should have installed in the device in order to launch throuh the below code.
+
+Next to Start Configuring Desired Capability in eclipse in order make understand Appium and invoke the application to be launch in the device
+
+Note #2: Before writing the desired capability, one should know about the Device details and the Appium server host port. To know the appium server local listning port, you just run the 'appium' in the terminal: Here in the case this is the local listener  "0.0.0.0:4723".
+
+ Note 3#: Hit 'adb devices' in order to get the device recoganized id  
+In Eclipse#: 
+Step 1: Create a class with junit/TestNg in a Specific Package under a Project : 
+Step 2: Once you created, you get method with @TEST annotation and below that Pass follwoing code
+
+
+		
+		DesiredCapabilities cap = new DesiredCapabilities (); 
+		cap.setCapability("platformName", "Android");
+		cap.setCapability("deviceName", "S8WCV8UWGUJ7MVNF");//This is the device which already connected to the machine.
+		cap.setCapability("appPackage", "com.pacakagename.example"); //This and below activity details will be availbale with the Developer
+		cap.setCapability("appActivity", "com.packagename.example.activityname");// Need to specify the common Main activity here.
+		
+		// This would send the desired capability specified for the above device to the Appium server
+		RemoteWebDriver driver = new RemoteWebDriver(new URL("http://0.0.0.0:4723/wd/hub/"), cap);
+
+
+
+
+Step 3: Once you done with this, Run the Appium server from the command line (If you already have lauched appium no need to start again ) wait it loads till "info: Console LogLevel: debug"
+
+Step 4: Next run the above script as Junit/TestNg . Make sure the Mob Device has been connected to the machine. 
+
+It will laucnh the app installed in your device. 
+
+
+
+		
+
+
